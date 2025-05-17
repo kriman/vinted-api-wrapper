@@ -150,8 +150,8 @@ class Vinted:
 
     def item_info(self, item_id: int, raw: bool = False) -> Union[ItemsResponse, Response]:
         if raw:
-            return self._get_raw(Endpoints.ITEMS, item_id)
-        return self._get(Endpoints.ITEMS, ItemsResponse, item_id)
+            return self._get_raw(Endpoints.ITEM, item_id)
+        return self._get(Endpoints.ITEM, ItemsResponse, item_id)
 
     def user_info(self, user_id: int, localize: bool = False, raw: bool = False) -> Union[UserResponse, Response]:
         params = {"localize": localize}
