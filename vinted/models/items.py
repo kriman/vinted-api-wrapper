@@ -215,6 +215,9 @@ class DetailedItem:
     icon_badges: Optional[list]
     item_box: ItemBox
 
+@dataclass
+class ItemPhotosResponse(VintedResponse):
+    photos: List[ItemPhoto]
 
 @dataclass
 class ItemsResponse(VintedResponse):

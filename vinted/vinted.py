@@ -10,7 +10,7 @@ from requests import Response
 from .endpoints import Endpoints
 from .models.base import VintedResponse
 from .models.filters import Catalog, FiltersResponse, InitializersResponse
-from .models.items import ItemsResponse, UserItemsResponse
+from .models.items import ItemsResponse, UserItemsResponse, ItemPhotosResponse
 from .models.other import Domain, SortOption
 from .models.search import SearchResponse, SearchSuggestionsResponse, UserSearchResponse
 from .models.users import (
@@ -152,6 +152,11 @@ class Vinted:
         if raw:
             return self._get_raw(Endpoints.ITEM, item_id)
         return self._get(Endpoints.ITEM, ItemsResponse, item_id)
+
+    def item_photos(self, item_id: int, raw: bool = False) -> Union[ItemPhotosResponse, Response]:
+        if raw:
+            return self._get_raw(Endpoints.ITEM_PHOTOS, item_id)
+        return self._get(Endpoints.ITEM_PHOTOS, ItemPhotosResponse, item_id)
 
     def user_info(self, user_id: int, localize: bool = False, raw: bool = False) -> Union[UserResponse, Response]:
         params = {"localize": localize}
