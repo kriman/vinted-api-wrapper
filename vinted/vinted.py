@@ -44,7 +44,7 @@ class Vinted:
         return response.cookies
 
     def _call(self, method: Literal["get"], *args, **kwargs):
-        if params := kwargs.pop("params"):
+        if params := kwargs.pop("params", None):
             updated_params = deepcopy(params)
 
             # Replace None values with empty strings
