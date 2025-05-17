@@ -71,7 +71,6 @@ class Vinted:
         self,
             endpoint: Endpoints,
             format_values=None,
-            wanted_status_code: int = 200,
             *args,
             **kwargs,
     ) -> Response:
@@ -79,32 +78,19 @@ class Vinted:
             url = self.api_url + endpoint.value.format(format_values)
         else:
             url = self.api_url + endpoint.value
-        response = self._call(method="get", url=url, *args, **kwargs)
-        if response.status_code != wanted_status_code and not kwargs.get("recursive"):
-            self.fetch_cookies()
-            return self._get_raw(
-                endpoint=endpoint,
-                format_values=format_values,
-                wanted_status_code=wanted_status_code,
-                recursive=True,
-                *args,
-                **kwargs,
-            )
-        return response
+        return self._call(method="get", url=url, *args, **kwargs)
 
     def _get(
         self,
         endpoint: Endpoints,
         response_model: VintedResponse,
         format_values=None,
-        wanted_status_code: int = 200,
         *args,
         **kwargs,
     ):
         response = self._get_raw(
             endpoint=endpoint,
             format_values=format_values,
-            wanted_status_code=wanted_status_code,
             *args,
             **kwargs
         )
